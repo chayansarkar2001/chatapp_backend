@@ -99,7 +99,6 @@ app.get("/api/deleteallmessages", async (req, res) => {
 io.on('connection', (socket) => {
 
     const handleJoin = async ({ userDetails }) => {
-        console.log("join")
         const { contact, userName } = userDetails
         try {
             const user = await User.findOne({ contact: contact })
@@ -171,7 +170,6 @@ io.on('connection', (socket) => {
 
         const user = await User.findOne({ contact }).select("chats")
         if (!user) return
-
         for (let chatWith in CHATS[contact]) {
 
             let otheruser = await User.findOne({ "contact": chatWith }).select("chats")
